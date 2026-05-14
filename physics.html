@@ -1,1 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Physics - Nuclear History & Mechanics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; line-height: 1.6; }
+@keyframes scan { 0% { top: -10%; opacity: 0; } 50% { opacity: 1; box-shadow: 0 0 15px #00ff66; } 100% { top: 110%; opacity: 0; } }
+@keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 243, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); } }
+@keyframes glitch { 0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); } 20% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); } 40% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, -2px); } 60% { clip-path: inset(5% 0 80% 0); transform: translate(2px, 2px); } 80% { clip-path: inset(60% 0 10% 0); transform: translate(-2px, 2px); } 100% { clip-path: inset(0 0 0 0); transform: translate(0); } }
+@keyframes slideUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+.\30 29 { position: fixed; top: -40px; left: 0; width: 100vw; height: calc(100vh + 80px); pointer-events: none; z-index: -1; background: linear-gradient(rgba(0,243,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,243,255,0.03) 1px, transparent 1px); background-size: 40px 40px; animation: gridMove 3s linear infinite; }
+.\30 30 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: opacity 0.5s ease; mix-blend-mode: luminosity; }
+.\30 31 { position: absolute; top: 0; left: 0; width: 20px; height: 20px; border-top: 2px solid #00f3ff; border-left: 2px solid #00f3ff; z-index: 2; }
+.\30 32 { position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; border-bottom: 2px solid #00f3ff; border-right: 2px solid #00f3ff; z-index: 2; }
+.\30 33 { width: 80px; height: 80px; border-radius: 50%; border: 2px dashed #00f3ff; display: flex; align-items: center; justify-content: center; position: relative; }
+.\30 33::before { content: ''; position: absolute; width: 40px; height: 40px; background: #00f3ff; border-radius: 50%; animation: pulse 2s infinite; }
+.\30 34 { position: absolute; left: 0; width: 100%; height: 2px; background: #00ff66; z-index: 10; opacity: 0; animation: scan 3s infinite linear; }
+.\30 35 { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both; }
+.\30 36 { position: absolute; right: 10px; top: 10px; font-size: 10px; color: #00f3ff; letter-spacing: 2px; }
+.\30 01 { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; border-bottom: 1px solid rgba(0, 243, 255, 0.2); background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px rgba(0, 243, 255, 0.05); }
+.\30 02 { font-size: 24px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; display: flex; align-items: center; gap: 15px; }
+.\30 02::before { content: ''; display: block; width: 12px; height: 12px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; }
+.\30 03 { display: flex; gap: 40px; }
+.\30 04 { color: #8b949e; text-decoration: none; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
+.\30 04::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px; background: #00f3ff; transition: width 0.3s ease; box-shadow: 0 0 8px #00f3ff; }
+.\30 04:hover { color: #ffffff; }
+.\30 04:hover::after { width: 100%; }
+.\30 05 { color: #00f3ff; }
+.\30 05::after { width: 100%; }
+.\30 06 { max-width: 1400px; margin: 60px auto; padding: 0 30px; animation: slideUp 0.8s ease-out; }
+.\30 07 { text-align: center; margin-bottom: 80px; border: 1px solid rgba(0, 243, 255, 0.2); padding: 80px 40px; background: radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.15) 0%, transparent 70%), #0a0d14; position: relative; overflow: hidden; box-shadow: inset 0 0 60px rgba(0, 243, 255, 0.05); }
+.\30 08 { font-size: 48px; color: #ffffff; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 0 20px rgba(0, 243, 255, 0.4); position: relative; z-index: 2; }
+.\30 09 { font-size: 16px; color: #a1aab5; max-width: 700px; margin: 0 auto; line-height: 1.8; position: relative; z-index: 2; }
+.\30 10 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 100px; }
+.\30 11 { border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(145deg, #0a0d14 0%, #05070a 100%); padding: 40px; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.\30 11:hover { border-color: #00ff66; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 255, 102, 0.1); }
+.\30 11:hover .\30 30 { opacity: 0.8; mix-blend-mode: normal; }
+.\30 12 { font-size: 24px; color: #ffffff; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; text-transform: uppercase; letter-spacing: 2px; }
+.\30 12::before { content: '//'; color: #00ff66; }
+.\30 13 { font-size: 15px; margin-bottom: 30px; color: #8b949e; line-height: 1.8; }
+.\30 14 { width: 100%; height: 280px; background-color: #000; border: 1px solid rgba(0, 243, 255, 0.3); display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; padding: 20px; position: relative; overflow: hidden; }
+.\30 15 { position: relative; z-index: 3; font-size: 12px; font-weight: bold; color: #00f3ff; background: rgba(0, 0, 0, 0.7); padding: 5px 10px; border-left: 2px solid #00f3ff; margin-bottom: 10px; text-transform: uppercase; backdrop-filter: blur(5px); }
+.\30 16 { position: relative; z-index: 3; font-size: 11px; color: #ffffff; background: rgba(0, 0, 0, 0.7); padding: 10px; width: 100%; backdrop-filter: blur(5px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.\30 17 { border: 1px solid rgba(138, 43, 226, 0.3); background: #0a0d14; padding: 60px; margin-bottom: 80px; position: relative; box-shadow: inset 0 0 80px rgba(138, 43, 226, 0.05); }
+.\30 18 { font-size: 32px; color: #ffffff; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 4px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+.\30 18::after { content: 'SYS.OP.READY'; font-size: 12px; color: #00ff66; letter-spacing: 2px; }
+.\30 19 { display: grid; grid-template-columns: 350px 1fr; gap: 60px; align-items: stretch; }
+.\30 20 { display: flex; flex-direction: column; gap: 20px; }
+.\30 21 { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px 20px; cursor: pointer; transition: all 0.3s ease; text-align: left; font-family: inherit; color: #8b949e; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; position: relative; overflow: hidden; }
+.\30 21::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: transparent; transition: all 0.3s ease; }
+.\30 21:hover { background: rgba(0, 243, 255, 0.05); color: #ffffff; border-color: rgba(0, 243, 255, 0.3); transform: translateX(5px); }
+.\30 22 { color: #00f3ff; background: rgba(0, 243, 255, 0.05); border-color: rgba(0, 243, 255, 0.3); box-shadow: 0 0 20px rgba(0, 243, 255, 0.1); transform: translateX(5px); }
+.\30 22::before { background: #00f3ff; box-shadow: 0 0 10px #00f3ff; }
+.\30 23 { background: #05070a; border: 1px solid #00f3ff; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: inset 0 0 50px rgba(0, 243, 255, 0.05); overflow: hidden; min-height: 400px; }
+.\30 24 { font-size: 22px; color: #ffffff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; display: inline-block; padding-bottom: 10px; border-bottom: 1px dashed rgba(0, 243, 255, 0.5); }
+.\30 25 { font-size: 15px; color: #a1aab5; line-height: 1.8; min-height: 90px; }
+.\30 26 { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgba(0, 243, 255, 0.2); margin-top: 30px; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 243, 255, 0.03) 2px, rgba(0, 243, 255, 0.03) 4px); position: relative; padding: 40px; }
+.\30 27 { font-size: 12px; color: #00ff66; font-weight: bold; letter-spacing: 2px; margin-top: 30px; text-shadow: 0 0 10px #00ff66; background: rgba(0, 255, 102, 0.1); padding: 8px 16px; border: 1px solid rgba(0, 255, 102, 0.3); }
+.\30 28 { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 0; text-align: center; color: #8b949e; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; background: #05070a; }
+@media (max-width: 992px) {
+.\30 01 { flex-direction: column; gap: 20px; padding: 20px; }
+.\30 10 { grid-template-columns: 1fr; }
+.\30 19 { grid-template-columns: 1fr; }
+.\30 23 { min-height: 450px; }
+}
+</style>
+</head>
+<body>
 
+<div class="029"></div>
+
+<nav class="001">
+  <div class="002">Nuc-Metrics [IN]</div>
+  <div class="003">
+    <a href="physics.html" class="004 005">The Physics</a>
+    <a href="timeline.html" class="004">The Journey</a>
+    <a href="strategy.html" class="004">The Strategy</a>
+  </div>
+</nav>
+
+<main class="006">
+  <section class="007">
+    <h1 class="008">Nuclear Mechanics & Foundations</h1>
+    <p class="009">An analytical breakdown of nuclear reactions, energy liberation pathways, and core global physics principles framework mapped through advanced telemetrics.</p>
+  </section>
+
+  <section class="010">
+    <div class="011">
+      <h2 class="012">Nuclear Fission</h2>
+      <p class="013">The splitting of a heavy atomic nucleus into lighter nuclei. This reaction releases a significant volume of energy alongside free neutrons, driving subsequent reactions in a self-sustaining cycle when critical mass thresholds are verified.</p>
+      <div class="014">
+        <div class="036">TRK-A // 94.21</div>
+        <img src="https://i.ibb.co/S759w2MG/Screenshot-2026-05-14-23-03-06-45-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Fission" class="030">
+        <div class="034"></div>
+        <div class="031"></div>
+        <div class="032"></div>
+        <div class="015">[Diagram Block: 00A1 - Fission Mechanism]</div>
+        <div class="016">Visual representation tracking U-235 or Pu-239 neutron bombardment, structural deformation, separation phase, and kinetic release vectors.</div>
+      </div>
+    </div>
+
+    <div class="011">
+      <h2 class="012">Nuclear Fusion</h2>
+      <p class="013">The process where multiple light atomic nuclei combine to form a single heavier nucleus. This fundamental mechanism powers stellar systems and requires extreme temperature and pressure conditions to overcome electrostatic repulsion forces.</p>
+      <div class="014">
+        <div class="036">TRK-B // 88.04</div>
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=800&q=80" alt="Fusion" class="030">
+        <div class="034"></div>
+        <div class="031"></div>
+        <div class="032"></div>
+        <div class="015">[Diagram Block: 00A2 - Fusion Dynamics]</div>
+        <div class="016">Visual blueprint mapping Deuterium and Tritium isotope interaction producing Helium-4, high-energy neutron discharge, and plasma confinement constraints.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="017">
+    <h2 class="018">Interactive Reactor Systems Simulator</h2>
+    <div class="019">
+      <div class="020">
+        <button class="021 022" data-step="1">01 // Fuel Rod Insertion</button>
+        <button class="021" data-step="2">02 // Moderator Interaction</button>
+        <button class="021" data-step="3">03 // Control Rod Regulation</button>
+        <button class="021" data-step="4">04 // Thermal Energy Transfer</button>
+      </div>
+      <div class="023" id="sim-container">
+        <div class="034"></div>
+        <div>
+          <h3 class="024" id="sim-title">Fuel Rod Insertion</h3>
+          <p class="025" id="sim-desc">Enriched uranium or plutonium fuel elements are arranged inside the core matrix. This initiates static baseline neutron emission levels required for operation.</p>
+        </div>
+        <div class="026">
+          <div class="031"></div>
+          <div class="032"></div>
+          <div class="033"></div>
+          <span class="027" id="sim-graphic">[ACTIVE SCHEMA STATUS: STAGE_01_FUEL_ENGAGED]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="028">
+  Technical Platform Core // Phase 1 Operational Architecture // India Nuclear History Resource
+</footer>
+
+<script>
+const n = document.querySelectorAll('.021');
+const t = document.getElementById('sim-title');
+const d = document.getElementById('sim-desc');
+const g = document.getElementById('sim-graphic');
+const c = document.getElementById('sim-container');
+
+const m = {
+  1: {
+    t: "Fuel Rod Insertion",
+    d: "Enriched uranium or plutonium fuel elements are arranged inside the core matrix. This initiates static baseline neutron emission levels required for operation.",
+    g: "[ACTIVE SCHEMA STATUS: STAGE_01_FUEL_ENGAGED]"
+  },
+  2: {
+    t: "Moderator Interaction",
+    d: "Neutrons pass through heavy water (D2O) or graphite structures. This material slows high-velocity particles down to thermal speeds, optimized for sustaining uranium fission captures.",
+    g: "[ACTIVE SCHEMA STATUS: STAGE_02_MODERATION_MAXIMUM]"
+  },
+  3: {
+    t: "Control Rod Regulation",
+    d: "Cadmium or Boron control assemblies absorb excess neutrons. Adjusting their deployment depth directly scales up or suppresses reactor heat generation parameters.",
+    g: "[ACTIVE SCHEMA STATUS: STAGE_03_FLUX_STABILIZED]"
+  },
+  4: {
+    t: "Thermal Energy Transfer",
+    d: "Pressurized coolant loops extract thermal energy from fission events. The heated medium transitions water to high-pressure steam, forcing structural turbine rotation.",
+    g: "[ACTIVE SCHEMA STATUS: STAGE_04_POWER_GENERATION_OUTPUT]"
+  }
+};
+
+n.forEach(b => {
+  b.addEventListener('click', () => {
+    if (b.classList.contains('022')) return;
+    n.forEach(x => x.classList.remove('022'));
+    b.classList.add('022');
+    c.classList.remove('035');
+    void c.offsetWidth;
+    c.classList.add('035');
+    const s = b.getAttribute('data-step');
+    setTimeout(() => {
+      t.textContent = m[s].t;
+      d.textContent = m[s].d;
+      g.textContent = m[s].g;
+    }, 150);
+  });
+});
+</script>
+<footer class="028">
+  <span>Technical Platform Core // Phase 1 Operational Architecture // India Nuclear History Resource</span>
+  <span class="037">Engineered & Designed by JAGDEEP SINGH</span>
+</footer>
+</body>
+</html>
