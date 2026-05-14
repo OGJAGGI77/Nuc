@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Strategy - Three-Stage Program & Dashboard</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; line-height: 1.6; }
+@keyframes scan { 0% { top: -10%; opacity: 0; } 50% { opacity: 1; box-shadow: 0 0 15px #00ff66; } 100% { top: 110%; opacity: 0; } }
+@keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
+@keyframes slideUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.\30 57 { position: fixed; top: -40px; left: 0; width: 100vw; height: calc(100vh + 80px); pointer-events: none; z-index: -1; background: linear-gradient(rgba(0,243,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,243,255,0.03) 1px, transparent 1px); background-size: 40px 40px; animation: gridMove 3s linear infinite; }
+
+.\30 01 { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; border-bottom: 1px solid rgba(0, 243, 255, 0.2); background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px rgba(0, 243, 255, 0.05); }
+.\30 02 { font-size: 24px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; display: flex; align-items: center; gap: 15px; }
+.\30 02::before { content: ''; display: block; width: 12px; height: 12px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; }
+.\30 03 { display: flex; gap: 40px; }
+.\30 04 { color: #8b949e; text-decoration: none; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
+.\30 04::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px; background: #00f3ff; transition: width 0.3s ease; box-shadow: 0 0 8px #00f3ff; }
+.\30 04:hover { color: #ffffff; }
+.\30 04:hover::after { width: 100%; }
+.\30 05 { color: #00f3ff; }
+.\30 05::after { width: 100%; }
+
+.\30 06 { max-width: 1300px; margin: 60px auto; padding: 0 30px; animation: slideUp 0.8s ease-out; }
+.\30 07 { text-align: center; margin-bottom: 80px; border: 1px solid rgba(0, 243, 255, 0.2); padding: 80px 40px; background: radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.15) 0%, transparent 70%), #0a0d14; position: relative; overflow: hidden; box-shadow: inset 0 0 60px rgba(0, 243, 255, 0.05); }
+.\30 08 { font-size: 48px; color: #ffffff; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 0 20px rgba(0, 243, 255, 0.4); position: relative; z-index: 2; }
+.\30 09 { font-size: 16px; color: #a1aab5; max-width: 700px; margin: 0 auto; line-height: 1.8; position: relative; z-index: 2; }
+
+.\30 40 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 80px; perspective: 1000px; }
+.\30 41 { border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(145deg, #0a0d14 0%, #05070a 100%); padding: 35px; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+.\30 41::before { content: attr(data-stage); position: absolute; top: -12px; right: 20px; font-size: 12px; font-weight: bold; color: #00f3ff; background: #05070a; border: 1px solid #00f3ff; padding: 4px 12px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); }
+.\30 41:hover { border-color: #00ff66; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 255, 102, 0.1); }
+.\30 41:hover .\30 58 { opacity: 0.8; mix-blend-mode: normal; transform: scale(1.05); }
+
+.\30 42 { font-size: 20px; color: #ffffff; margin-bottom: 20px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; letter-spacing: 2px; }
+.\30 42::before { content: '>'; color: #00ff66; font-weight: 900; animation: blink 1s infinite; }
+.\30 43 { font-size: 14px; margin-bottom: 20px; min-height: 140px; color: #8b949e; line-height: 1.8; }
+
+.\30 44 { width: 100%; height: 200px; background-color: #000; border: 1px solid rgba(0, 243, 255, 0.3); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 15px; }
+.\30 58 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: all 0.5s ease; mix-blend-mode: luminosity; z-index: 1; }
+.\30 59 { position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-top: 2px solid #00f3ff; border-left: 2px solid #00f3ff; z-index: 2; }
+.\30 60 { position: absolute; bottom: 0; right: 0; width: 15px; height: 15px; border-bottom: 2px solid #00f3ff; border-right: 2px solid #00f3ff; z-index: 2; }
+.\30 62 { position: absolute; left: 0; width: 100%; height: 2px; background: #00ff66; z-index: 10; opacity: 0; animation: scan 3s infinite linear; }
+.\30 63 { position: absolute; right: 10px; top: 10px; font-size: 10px; color: #00f3ff; letter-spacing: 2px; z-index: 3; background: rgba(0,0,0,0.5); padding: 2px 6px; backdrop-filter: blur(2px); }
+
+.\30 45 { position: relative; z-index: 3; font-size: 11px; font-weight: bold; color: #00f3ff; background: rgba(0, 0, 0, 0.7); padding: 5px 8px; border-left: 2px solid #00f3ff; margin-bottom: 8px; text-transform: uppercase; align-self: flex-start; }
+.\30 46 { position: relative; z-index: 3; font-size: 10px; color: #ffffff; background: rgba(0, 0, 0, 0.7); padding: 8px; width: 100%; text-align: left; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+.\30 64 { display: inline-block; margin-top: 15px; color: #00f3ff; font-size: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px dashed rgba(0, 243, 255, 0.4); padding-bottom: 2px; transition: all 0.3s ease; }
+.\30 64:hover { color: #00ff66; border-color: #00ff66; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6); transform: translateX(5px); }
+
+.\30 47 { display: grid; grid-template-columns: 350px 1fr; gap: 50px; border: 1px solid rgba(138, 43, 226, 0.3); background: rgba(10, 13, 20, 0.8); padding: 50px; margin-bottom: 60px; box-shadow: inset 0 0 80px rgba(138, 43, 226, 0.05); backdrop-filter: blur(10px); }
+.\30 48 { border-right: 1px dashed rgba(255, 255, 255, 0.1); padding-right: 50px; }
+.\30 49 { font-size: 26px; color: #ffffff; margin-bottom: 35px; text-transform: uppercase; letter-spacing: 3px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 15px; }
+.\30 49::after { content: 'SYS.DIAG'; font-size: 10px; color: #b366ff; letter-spacing: 2px; }
+
+.\30 50 { display: flex; flex-direction: column; gap: 20px; }
+.\30 51 { background: rgba(0, 243, 255, 0.02); border: 1px solid rgba(0, 243, 255, 0.2); padding: 20px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; position: relative; overflow: hidden; }
+.\30 51::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px; background: #00f3ff; }
+.\30 51:hover { background: rgba(0, 243, 255, 0.05); transform: translateX(5px); border-color: rgba(0, 243, 255, 0.5); }
+.\30 52 { font-size: 12px; color: #a1aab5; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+.\30 53 { font-size: 28px; color: #00ff66; font-weight: 900; text-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
+
+.\30 54 { font-size: 22px; color: #ffffff; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+.\30 55 { width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; font-size: 13px; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0, 0, 0, 0.3); }
+.\30 55 th { padding: 18px; border-bottom: 1px solid rgba(0, 243, 255, 0.3); color: #00f3ff; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; background: rgba(0, 243, 255, 0.05); }
+.\30 55 td { padding: 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #c9d1d9; transition: all 0.3s ease; }
+.\30 55 tbody tr { transition: all 0.3s ease; }
+.\30 55 tbody tr:hover td { background: rgba(0, 255, 102, 0.05); color: #ffffff; border-color: rgba(0, 255, 102, 0.2); }
+.\30 56 { color: #00ff66 !important; font-weight: bold; letter-spacing: 1px; font-size: 11px; }
+
+.\30 28 { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 0; text-align: center; color: #8b949e; font-size: 12px; margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 15px; letter-spacing: 2px; text-transform: uppercase; background: #05070a; }
+.\30 65 { color: #00ff66; font-size: 10px; letter-spacing: 4px; padding: 5px 15px; border: 1px dashed rgba(0, 255, 102, 0.3); background: rgba(0, 255, 102, 0.05); }
+
+@media (max-width: 1024px) {
+.\30 40 { grid-template-columns: 1fr; }
+.\30 47 { grid-template-columns: 1fr; padding: 30px; }
+.\30 48 { border-right: none; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-right: 0; padding-bottom: 30px; }
+.\30 55 th, .\30 55 td { padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="057"></div>
+
+<nav class="001">
+  <div class="002">Nuc-Metrics [IN]</div>
+  <div class="003">
+    <a href="physics.html" class="004">The Physics</a>
+    <a href="timeline.html" class="004">The Journey</a>
+    <a href="strategy.html" class="004 005">The Strategy</a>
+  </div>
+</nav>
+
+<main class="006">
+  <section class="007">
+    <h1 class="008">Strategic Energy Architecture</h1>
+    <p class="009">Analyzing India's closed fuel cycle deployment strategy, optimized to exploit extensive domestic Thorium reserves through phased progressive integration.</p>
+  </section>
+
+  <section class="040">
+    <div class="041" data-stage="STAGE 01">
+      <h2 class="042">PHWR Systems</h2>
+      <p class="043">
+        Pressurized Heavy Water Reactors use natural Uranium-238 fuel matrices to generate electrical power output while transforming stable isotopes into Plutonium-239 fissile byproducts.
+        <br><a href="https://en.wikipedia.org/wiki/Pressurized_heavy-water_reactor" target="_blank" class="064">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+      </p>
+      <div class="044">
+        <div class="063">FLW-1 // 92.4U</div>
+        <img src="https://i.ibb.co/SXhRHN6x/Pressurized-heavy-water-reactor.png" alt="PHWR Pipes" class="058">
+        <div class="062"></div>
+        <div class="059"></div>
+        <div class="060"></div>
+        <div class="045">[Flow Block: 00C1 - Stage I Input]</div>
+        <div class="046">Tracking U-238 throughput, heavy water modulation loop, and Pu-239 yield metrics.</div>
+      </div>
+    </div>
+
+    <div class="041" data-stage="STAGE 02">
+      <h2 class="042">Fast Breeder Loops</h2>
+      <p class="043">
+        Fast Breeder Reactors utilize the Plutonium-239 harvested from Stage I mixed with liquid sodium coolants to transmute blanketing Thorium-232 layers directly into fissile Uranium-233.
+        <br><a href="https://en.wikipedia.org/wiki/Fast_breeder_reactor" target="_blank" class="064">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+      </p>
+      <div class="044">
+        <div class="063">FLW-2 // 94.PU</div>
+        <img src="https://i.ibb.co/Wh5mVBt/2019.jpg" alt="Core Array" class="058">
+        <div class="062"></div>
+        <div class="059"></div>
+        <div class="060"></div>
+        <div class="045">[Flow Block: 00C2 - Stage II Cycle]</div>
+        <div class="046">Tracking liquid sodium loop parameters and breeding multi-factor calculation values.</div>
+      </div>
+    </div>
+
+    <div class="041" data-stage="STAGE 03">
+      <h2 class="042">Advanced Thorium</h2>
+      <p class="043">
+        Thermal Breeder Reactors consume the generated Uranium-233 alongside independent Thorium fuel components, creating a self-sustaining power system independent of global fuel supply limitations.
+        <br><a href="https://en.wikipedia.org/wiki/Thorium_fuel_cycle" target="_blank" class="064">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+      </p>
+      <div class="044">
+        <div class="063">FLW-3 // 90.TH</div>
+        <img src="https://i.ibb.co/r2r86swN/Thorium-sample-0-1g.jpg" alt="Advanced Plasma" class="058">
+        <div class="062"></div>
+        <div class="059"></div>
+        <div class="060"></div>
+        <div class="045">[Flow Block: 00C3 - Stage III Yield]</div>
+        <div class="046">Tracking long-term fuel cycle closure, recycling capacity, and thermal limits.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="047">
+    <div class="048">
+      <h2 class="049">Fleet Status</h2>
+      <div class="050">
+        <div class="051">
+          <span class="052">Active Reactors</span>
+          <span class="053">22</span>
+        </div>
+        <div class="051">
+          <span class="052">Under Build</span>
+          <span class="053">08</span>
+        </div>
+        <div class="051">
+          <span class="052">Gross MWe Capacity</span>
+          <span class="053">7,480</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="054">Primary Operational Nodes</h2>
+      <table class="055">
+        <thead>
+          <tr>
+            <th>Facility Node</th>
+            <th>Type Architecture</th>
+            <th>Capacity (MWe)</th>
+            <th>Grid Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kakrapar (KAPS)</td>
+            <td>PHWR / Advanced</td>
+            <td>1840</td>
+            <td class="056">ONLINE // NOMINAL</td>
+          </tr>
+          <tr>
+            <td>Kudankulam (KKNPP)</td>
+            <td>VVER-1000</td>
+            <td>2000</td>
+            <td class="056">ONLINE // NOMINAL</td>
+          </tr>
+          <tr>
+            <td>Tarapur (TAPS)</td>
+            <td>BWR / PHWR</td>
+            <td>1400</td>
+            <td class="056">ONLINE // NOMINAL</td>
+          </tr>
+          <tr>
+            <td>Kaiga (KGS)</td>
+            <td>PHWR</td>
+            <td>880</td>
+            <td class="056">ONLINE // NOMINAL</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="028">
+  <span>Technical Platform Core // Phase 3 Operational Architecture // India Nuclear History Resource</span>
+  <span class="065">Engineered & Designed by JAGDEEP SINGH</span>
+</footer>
+
+</body>
+</html>

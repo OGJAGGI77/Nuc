@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Journey - Nuclear Timeline & History</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; line-height: 1.6; }
+@keyframes scan { 0% { top: -10%; opacity: 0; } 50% { opacity: 1; box-shadow: 0 0 15px #00ff66; } 100% { top: 110%; opacity: 0; } }
+@keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
+@keyframes slideUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes pulseNode { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(0, 255, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); } }
+
+.\30 40 { position: fixed; top: -40px; left: 0; width: 100vw; height: calc(100vh + 80px); pointer-events: none; z-index: -1; background: linear-gradient(rgba(0,243,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,243,255,0.03) 1px, transparent 1px); background-size: 40px 40px; animation: gridMove 3s linear infinite; }
+
+.\30 01 { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; border-bottom: 1px solid rgba(0, 243, 255, 0.2); background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px rgba(0, 243, 255, 0.05); }
+.\30 02 { font-size: 24px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; display: flex; align-items: center; gap: 15px; }
+.\30 02::before { content: ''; display: block; width: 12px; height: 12px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; }
+.\30 03 { display: flex; gap: 40px; }
+.\30 04 { color: #8b949e; text-decoration: none; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
+.\30 04::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px; background: #00f3ff; transition: width 0.3s ease; box-shadow: 0 0 8px #00f3ff; }
+.\30 04:hover { color: #ffffff; }
+.\30 04:hover::after { width: 100%; }
+.\30 05 { color: #00f3ff; }
+.\30 05::after { width: 100%; }
+
+.\30 06 { max-width: 1200px; margin: 60px auto; padding: 0 30px; animation: slideUp 0.8s ease-out; }
+.\30 07 { text-align: center; margin-bottom: 80px; border: 1px solid rgba(0, 243, 255, 0.2); padding: 80px 40px; background: radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.15) 0%, transparent 70%), #0a0d14; position: relative; overflow: hidden; box-shadow: inset 0 0 60px rgba(0, 243, 255, 0.05); }
+.\30 08 { font-size: 48px; color: #ffffff; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 0 20px rgba(0, 243, 255, 0.4); position: relative; z-index: 2; }
+.\30 09 { font-size: 16px; color: #a1aab5; max-width: 700px; margin: 0 auto; line-height: 1.8; position: relative; z-index: 2; }
+
+.\30 29 { position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0; }
+.\30 29::after { content: ''; position: absolute; width: 2px; background: linear-gradient(to bottom, rgba(0, 243, 255, 0.1), rgba(0, 243, 255, 0.8), rgba(0, 243, 255, 0.1)); top: 0; bottom: 0; left: 50%; margin-left: -1px; border: none; box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); }
+
+.\30 30 { padding: 20px 50px; position: relative; width: 50%; perspective: 1000px; }
+.\30 30::after { content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background-color: #00ff66; top: 50px; border-radius: 50%; z-index: 1; box-shadow: 0 0 15px #00ff66; animation: pulseNode 2s infinite; }
+.\30 31 { left: 0; }
+.\30 32 { left: 50%; }
+.\30 32::after { left: -8px; right: auto; }
+
+.\30 33 { padding: 40px; background: linear-gradient(145deg, #0a0d14 0%, #05070a 100%); position: relative; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+.\30 33:hover { border-color: #00ff66; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 255, 102, 0.1); }
+.\30 33:hover .\30 41 { opacity: 0.8; mix-blend-mode: normal; transform: scale(1.05); }
+
+.\30 34 { font-size: 24px; font-weight: bold; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center; gap: 15px; letter-spacing: 2px; }
+.\30 34::before { content: '//'; color: #00ff66; }
+.\30 35 { display: inline-block; padding: 6px 12px; background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); color: #00f3ff; font-size: 11px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; backdrop-filter: blur(5px); }
+.\30 36 { font-size: 15px; color: #8b949e; margin-bottom: 30px; line-height: 1.8; }
+
+.\30 37 { width: 100%; height: 220px; background-color: #000; border: 1px solid rgba(0, 243, 255, 0.3); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
+.\30 41 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: all 0.5s ease; mix-blend-mode: luminosity; z-index: 1; }
+.\30 42 { position: absolute; top: 0; left: 0; width: 20px; height: 20px; border-top: 2px solid #00f3ff; border-left: 2px solid #00f3ff; z-index: 2; }
+.\30 43 { position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; border-bottom: 2px solid #00f3ff; border-right: 2px solid #00f3ff; z-index: 2; }
+.\30 44 { position: absolute; left: 0; width: 100%; height: 2px; background: #00ff66; z-index: 10; opacity: 0; animation: scan 3s infinite linear; }
+.\30 45 { position: absolute; right: 10px; top: 10px; font-size: 10px; color: #00f3ff; letter-spacing: 2px; z-index: 3; }
+
+.\30 38 { position: relative; z-index: 3; font-size: 12px; font-weight: bold; color: #00f3ff; background: rgba(0, 0, 0, 0.7); padding: 5px 10px; border-left: 2px solid #00f3ff; margin-bottom: 10px; text-transform: uppercase; backdrop-filter: blur(5px); align-self: flex-start; }
+.\30 39 { position: relative; z-index: 3; font-size: 11px; color: #ffffff; background: rgba(0, 0, 0, 0.7); padding: 10px; width: 100%; backdrop-filter: blur(5px); border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: left; }
+
+.\30 28 { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 0; text-align: center; color: #8b949e; font-size: 12px; margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 15px; letter-spacing: 2px; text-transform: uppercase; background: #05070a; }
+.\30 46 { color: #00ff66; font-size: 10px; letter-spacing: 4px; padding: 5px 15px; border: 1px dashed rgba(0, 255, 102, 0.3); background: rgba(0, 255, 102, 0.05); }
+
+/* NEW CLASS FOR WIKI LINKS */
+.\30 47 { display: inline-block; margin-top: 15px; color: #00f3ff; font-size: 11px; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px dashed rgba(0, 243, 255, 0.4); padding-bottom: 2px; transition: all 0.3s ease; }
+.\30 47:hover { color: #00ff66; border-color: #00ff66; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6); transform: translateX(5px); }
+
+@media (max-width: 992px) {
+.\30 01 { flex-direction: column; gap: 20px; padding: 20px; }
+.\30 29::after { left: 30px; }
+.\30 30 { width: 100%; padding-left: 70px; padding-right: 0; margin-bottom: 40px; }
+.\30 30::after { left: 22px; top: 40px; }
+.\30 32 { left: 0%; }
+}
+</style>
+</head>
+<body>
+
+<div class="040"></div>
+
+<nav class="001">
+  <div class="002">Nuc-Metrics [IN]</div>
+  <div class="003">
+    <a href="physics.html" class="004">The Physics</a>
+    <a href="timeline.html" class="004 005">The Journey</a>
+    <a href="strategy.html" class="004">The Strategy</a>
+  </div>
+</nav>
+
+<main class="006">
+  <section class="007">
+    <h1 class="008">Chronological Matrix</h1>
+    <p class="009">Tracking the integration of global atomic breakthroughs and India's sovereign technological development roadmap via advanced historical telemetry.</p>
+  </section>
+
+  <section class="029">
+    <div class="030 031">
+      <div class="033">
+        <div class="034">1942 // Chicago Pile-1</div>
+        <div class="035" style="border-color: rgba(138,43,226,0.5); color: #b366ff; background: rgba(138,43,226,0.1);">Global Context</div>
+        <p class="036">
+          Enrico Fermi leads the development of the world's first artificial self-sustaining nuclear chain reaction system, validating fundamental mathematical calculations on heavy element reactivity.
+          <br><a href="https://en.wikipedia.org/wiki/Chicago_Pile-1" target="_blank" class="047">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+        </p>
+        <div class="037">
+          <div class="045">TRK-C // 42.01</div>
+          <img src="https://i.ibb.co/wh7vG29J/IMG-20260514-232925.jpg" alt="Chicago Pile" class="041">
+          <div class="044"></div>
+          <div class="042"></div>
+          <div class="043"></div>
+          <div class="038">[Photo Block: 00B1 - Fermi Assembly]</div>
+          <div class="039">Archival render mapping graphite blocks and structural safety mechanism lines.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="030 032">
+      <div class="033">
+        <div class="034">1948 // Atomic Energy Act</div>
+        <div class="035">India Path</div>
+        <p class="036">
+          The Atomic Energy Commission of India is officially established under Dr. Homi Bhabha, consolidating state assets toward systematic scientific exploration and resource mining operations.
+          <br><a href="https://en.wikipedia.org/wiki/Department_of_Atomic_Energy_(India)" target="_blank" class="047">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+        </p>
+        <div class="037">
+          <div class="045">TRK-I // 48.09</div>
+          <img src="https://i.ibb.co/wZkTBmpP/TIFRAC-4col.jpg" alt="Blueprint" class="041">
+          <div class="044"></div>
+          <div class="042"></div>
+          <div class="043"></div>
+          <div class="038">[Document Block: 00B2 - Legislative Mandate]</div>
+          <div class="039">Blueprint breakdown of the original 1948 legislative strategic charter framework.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="030 031">
+      <div class="033">
+        <div class="034">1956 // Apsara Reactor</div>
+        <div class="035">India Path</div>
+        <p class="036">
+          Asia's first research reactor, Apsara, achieves criticality at Trombay using highly enriched uranium fuel blocks supplied via initial international technological cooperation framework channels.
+          <br><a href="https://en.wikipedia.org/wiki/Apsara_(nuclear_reactor)" target="_blank" class="047">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+        </p>
+        <div class="037">
+          <div class="045">TRK-I // 56.04</div>
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Reactor Core" class="041">
+          <div class="044"></div>
+          <div class="042"></div>
+          <div class="043"></div>
+          <div class="038">[Technical Block: 00B3 - Pool Reactor]</div>
+          <div class="039">Schematic drawing tracking core layout, water shielding depth, and fuel storage grid.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="030 032">
+      <div class="033">
+        <div class="034">1968 // NPT Resolution</div>
+        <div class="035" style="border-color: rgba(138,43,226,0.5); color: #b366ff; background: rgba(138,43,226,0.1);">Global Context</div>
+        <p class="036">
+          The Nuclear Non-Proliferation Treaty opens for signature. India systematically refuses accession terms, citing structural geopolitical imbalances and restrictions targeting non-weapons states.
+          <br><a href="https://en.wikipedia.org/wiki/Treaty_on_the_Non-Proliferation_of_Nuclear_Weapons" target="_blank" class="047">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+        </p>
+        <div class="037">
+          <div class="045">TRK-G // 68.11</div>
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Global Map" class="041">
+          <div class="044"></div>
+          <div class="042"></div>
+          <div class="043"></div>
+          <div class="038">[Data Block: 00B4 - Treaty Mapping]</div>
+          <div class="039">Global treaty map separating signatory zones from unaligned technical nations.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="030 031">
+      <div class="033">
+        <div class="034">1974 // Smiling Buddha</div>
+        <div class="035">India Path</div>
+        <p class="036">
+          India successfully conducts its initial peaceful nuclear explosion verification test at Pokhran, demonstrating sovereign explosive design mastery under strict regional defense secrecy protocols.
+          <br><a href="https://en.wikipedia.org/wiki/Smiling_Buddha" target="_blank" class="047">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+        </p>
+        <div class="037">
+          <div class="045">TRK-I // 74.05</div>
+          <img src="https://i.ibb.co/JwM18zHd/images-3.jpg" alt="Desert Test" class="041">
+          <div class="044"></div>
+          <div class="042"></div>
+          <div class="043"></div>
+          <div class="038">[Site Block: 00B5 - Pokhran-I Shaft]</div>
+          <div class="039">Geological structural chart detailing depth coordinates and crater telemetry.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="030 032">
+      <div class="033">
+        <div class="034">1998 // Operation Shakti</div>
+        <div class="035">India Path</div>
+        <p class="036">
+          A series of five simultaneous underground detonations, including thermonuclear architectures, are verified at Pokhran-II, establishing India as a comprehensive weapon-capable nation.
+          <br><a href="https://en.wikipedia.org/wiki/Pokhran-II" target="_blank" class="047">EXT_QUERY // WIKI_DATABASE &rarr;</a>
+        </p>
+        <div class="037">
+          <div class="045">TRK-I // 98.05</div>
+          <img src="https://i.ibb.co/MWjH8ZL/Shakti-Bomb.jpg" alt="Seismic Data" class="041">
+          <div class="044"></div>
+          <div class="042"></div>
+          <div class="043"></div>
+          <div class="038">[Seismic Block: 00B6 - Waveform Analysis]</div>
+          <div class="039">Seismograph tracking readouts recorded at international verification arrays.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="028">
+  <span>Technical Platform Core // Phase 2 Operational Architecture // India Nuclear History Resource</span>
+  <span class="046">Engineered & Designed by JAGDEEP SINGH</span>
+</footer>
+
+</body>
+</html>
