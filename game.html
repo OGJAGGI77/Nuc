@@ -8,23 +8,22 @@
 * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; line-height: 1.6; touch-action: manipulation; }
 
-/* Background Grid */
+.\30 01 { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; border-bottom: 1px solid rgba(0, 243, 255, 0.2); background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 30px rgba(0, 243, 255, 0.05); }
+.\30 02 { font-size: 24px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; display: flex; align-items: center; gap: 15px; }
+.\30 02::before { content: ''; display: block; width: 12px; height: 12px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; }
+.\30 03 { display: flex; gap: 40px; }
+.\30 04 { color: #8b949e; text-decoration: none; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
+.\30 04::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px; background: #00f3ff; transition: width 0.3s ease; box-shadow: 0 0 8px #00f3ff; }
+.\30 04:hover { color: #ffffff; }
+.\30 04:hover::after { width: 100%; }
+.\30 05 { color: #00f3ff; }
+.\30 05::after { width: 100%; }
+
 .bg-grid { position: fixed; top: -40px; left: 0; width: 100vw; height: calc(100vh + 80px); pointer-events: none; z-index: -1; background: linear-gradient(rgba(0,243,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,243,255,0.03) 1px, transparent 1px); background-size: 40px 40px; animation: gridMove 3s linear infinite; }
 @keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
 
-/* Navigation */
-.nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; border-bottom: 1px solid rgba(0, 243, 255, 0.2); background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
-.logo { font-size: 24px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; display: flex; align-items: center; gap: 15px; }
-.logo::before { content: ''; display: block; width: 12px; height: 12px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; }
-.nav-links { display: flex; gap: 30px; flex-wrap: wrap; }
-.nav-link { color: #8b949e; text-decoration: none; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
-.nav-link:hover { color: #ffffff; }
-.nav-active { color: #00f3ff; border-bottom: 2px solid #00f3ff; padding-bottom: 5px; }
+.game-wrapper { max-width: 1200px; margin: 60px auto; padding: 0 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 
-/* Main Game Layout */
-.game-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-
-/* Left Side: The Core */
 .core-panel { text-align: center; background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 70%); padding: 40px 20px; border: 1px solid rgba(0, 243, 255, 0.1); position: relative; }
 .energy-readout { font-size: 42px; font-weight: bold; color: #00ff66; text-shadow: 0 0 20px rgba(0, 255, 102, 0.4); margin-bottom: 5px; }
 .mps-readout { font-size: 16px; color: #00f3ff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; }
@@ -34,11 +33,9 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
 .reactor-core { width: 100px; height: 100px; background: #00f3ff; border-radius: 50%; box-shadow: 0 0 40px #00f3ff; animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
 
-/* Floating Text Animation for clicks */
 .float-text { position: absolute; color: #00ff66; font-weight: bold; font-size: 20px; pointer-events: none; animation: floatUp 1s ease-out forwards; text-shadow: 0 0 10px #00ff66; z-index: 50; }
 @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-50px) scale(1.5); } }
 
-/* Right Side: The Upgrades */
 .store-panel { display: flex; flex-direction: column; gap: 15px; }
 .store-header { font-size: 20px; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; border-bottom: 1px dashed rgba(255, 255, 255, 0.2); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; }
 .reset-btn { font-size: 10px; color: #ff003c; border: 1px solid #ff003c; background: transparent; padding: 4px 8px; cursor: pointer; text-transform: uppercase; }
@@ -55,13 +52,12 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
 
 .up-count { font-size: 24px; color: #8b949e; font-weight: 900; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 4px; }
 
-/* Footer */
 .footer { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 0; text-align: center; color: #8b949e; font-size: 12px; margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 15px; letter-spacing: 2px; text-transform: uppercase; }
 .credit { color: #00ff66; font-size: 10px; letter-spacing: 4px; padding: 5px 15px; border: 1px dashed rgba(0, 255, 102, 0.3); background: rgba(0, 255, 102, 0.05); }
 
-@media (max-width: 900px) {
+@media (max-width: 992px) {
+  .\30 01 { flex-direction: column; gap: 20px; padding: 20px; }
   .game-wrapper { grid-template-columns: 1fr; }
-  .nav-bar { flex-direction: column; gap: 20px; padding: 20px; text-align: center; }
   .reactor-btn { width: 160px; height: 160px; }
   .reactor-core { width: 80px; height: 80px; }
 }
@@ -71,13 +67,13 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
 
 <div class="bg-grid"></div>
 
-<nav class="nav-bar">
-  <div class="logo">Nuc-Metrics [IN]</div>
-  <div class="nav-links">
-    <a href="index.html" class="nav-link">The Physics</a>
-    <a href="timeline.html" class="nav-link">The Journey</a>
-    <a href="strategy.html" class="nav-link">The Strategy</a>
-    <a href="game.html" class="nav-link nav-active">The Game</a>
+<nav class="001">
+  <div class="002">Nuc-Metrics [IN]</div>
+  <div class="003">
+    <a href="index.html" class="004">The Physics</a>
+    <a href="timeline.html" class="004">The Journey</a>
+    <a href="strategy.html" class="004">The Strategy</a>
+    <a href="game.html" class="004 005">The Game</a>
   </div>
 </nav>
 
@@ -113,12 +109,10 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
 </footer>
 
 <script>
-  // Game State
   let energy = 0;
   let baseClickValue = 1;
-  let mps = 0; // Megawatts per second
+  let mps = 0;
 
-  // Generators Configuration
   const generators = [
     { id: 'gen1', name: 'Neutron Emitter', baseCost: 15, baseYield: 1, count: 0 },
     { id: 'gen2', name: 'Coolant Loop', baseCost: 100, baseYield: 5, count: 0 },
@@ -127,14 +121,12 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     { id: 'gen5', name: 'Thorium Breeder', baseCost: 130000, baseYield: 5000, count: 0 }
   ];
 
-  // DOM Elements
   const energyDisplay = document.getElementById('energyDisplay');
   const mpsDisplay = document.getElementById('mpsDisplay');
   const mpcDisplay = document.getElementById('mpcDisplay');
   const upgradesContainer = document.getElementById('upgradesContainer');
   const clicker = document.getElementById('clicker');
 
-  // Utility: Format numbers (e.g., 1,000, 1.2M)
   function formatNumber(num) {
     if (num < 1000) return Math.floor(num);
     if (num < 1000000) return (num / 1000).toFixed(1) + 'k';
@@ -142,12 +134,10 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     return (num / 1000000000).toFixed(2) + 'B';
   }
 
-  // Calculate cost scaling (cost increases by 15% each purchase)
   function getCost(baseCost, count) {
     return Math.floor(baseCost * Math.pow(1.15, count));
   }
 
-  // Save/Load System
   function saveGame() {
     const saveData = {
       energy: energy,
@@ -174,7 +164,6 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     }
   }
 
-  // Initialization
   function initStore() {
     upgradesContainer.innerHTML = '';
     generators.forEach((gen, index) => {
@@ -202,7 +191,6 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     generators.forEach(gen => {
       mps += gen.count * gen.baseYield;
     });
-    // Click value is 1% of passive generation, or 1 if generation is low
     let clickVal = Math.floor(mps * 0.01);
     baseClickValue = clickVal > 1 ? clickVal : 1;
     
@@ -210,20 +198,17 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     mpcDisplay.innerText = `${formatNumber(baseClickValue)} MW / Click`;
   }
 
-  // Interactions
   function triggerFission(e) {
-    if(e.type === 'touchstart') e.preventDefault(); // Prevent double trigger on mobile
+    if(e.type === 'touchstart') e.preventDefault();
     
     energy += baseClickValue;
     updateUI();
 
-    // Floating text effect
     const rect = clicker.getBoundingClientRect();
     const floatEl = document.createElement('div');
     floatEl.className = 'float-text';
     floatEl.innerText = `+${formatNumber(baseClickValue)}`;
     
-    // Randomize position slightly around the clicker
     const offsetX = (Math.random() - 0.5) * 50;
     const offsetY = (Math.random() - 0.5) * 50;
     
@@ -242,7 +227,6 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
       energy -= cost;
       gen.count++;
       
-      // Update specific DOM elements for performance
       document.getElementById(`count-${index}`).innerText = gen.count;
       document.getElementById(`cost-${index}`).innerText = formatNumber(getCost(gen.baseCost, gen.count)) + " MW";
       
@@ -252,11 +236,9 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     }
   }
 
-  // Update Loop
   function updateUI() {
     energyDisplay.innerText = formatNumber(energy) + " MW";
     
-    // Check what the user can afford and gray out items they can't
     generators.forEach((gen, index) => {
       const el = document.getElementById(`store-${index}`);
       const cost = getCost(gen.baseCost, gen.count);
@@ -268,7 +250,6 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     });
   }
 
-  // Game Tick (Runs 10 times a second for smooth generation)
   setInterval(() => {
     if (mps > 0) {
       energy += mps / 10;
@@ -276,10 +257,8 @@ body { background-color: #05070a; color: #ffffff; font-family: 'Courier New', Co
     }
   }, 100);
 
-  // Auto-Save every 10 seconds
   setInterval(saveGame, 10000);
 
-  // Boot sequence
   loadGame();
   initStore();
   recalculateYields();
